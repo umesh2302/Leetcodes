@@ -1,0 +1,79 @@
+# https://www.codewars.com/kata/52742f58faf5485cae000b9a/train/python
+
+def format_duration(seconds):
+    
+    def compunte_years(seconds):
+        years = seconds // 31536000
+        if years >0 :
+            return years, seconds - years * 31536000
+        else:
+            return 0, seconds
+    def compunte_days(seconds):
+        years, seconds = compunte_years(seconds)
+
+        days = seconds // 86400
+        if days >0 :
+            return years,days, seconds - days * 86400
+        else:
+            return years, 0, seconds
+    def compunte_hours(seconds):
+        years, days, seconds = compunte_days(seconds)
+
+        hours = seconds // 3600
+        if hours >0 :
+            return years, days, hours, seconds - hours * 3600
+        else:
+            return years, days, 0, seconds
+    def compunte_minutes(seconds):
+        years, days, hours, seconds = compunte_hours(seconds)
+
+        minutes = seconds // 60
+        if minutes >0 :
+            return years, days, hours, minutes, seconds - minutes * 60
+        else:
+            return years, days, hours, 0, seconds
+    def compunte_second(seconds):
+        years, days, hours, minutes, second = compunte_minutes(seconds)
+
+        return years, days, hours, minutes, second
+    
+    years, days, hours, minutes, second = compunte_second(seconds)
+    use_string = []
+    if years > 0:
+        if years == 1:
+            use_string.append(f'{years} year')
+        else:
+            use_string.append(f'{years} years')
+    if days > 0:
+        if days == 1:
+            use_string.append(f'{days} day')
+        else:
+            use_string.append(f'{days} days')
+    if hours > 0:
+        if hours == 1:
+            use_string.append(f'{hours} hour')
+        else:
+            use_string.append(f'{hours} hours')
+    if minutes > 0:
+        if minutes == 1:
+            use_string.append(f'{minutes} minute')
+        else:
+            use_string.append(f'{minutes} minutes')
+    if second > 0:  
+        if second == 1:
+            use_string.append(f'{second} second')
+        else:
+            use_string.append(f'{second} seconds')
+
+    print (use_string)    
+    if seconds == 0 : 
+        return "now"
+    else: 
+        return ', '.join(use_string[:-1]) + ' and ' + use_string[-1] if len(use_string) > 1 else use_string[0]
+        
+# Test Cases
+print(format_duration(1)) # 1 second
+print(format_duration(62)) # 1 minute and 2 seconds
+print(format_duration(120)) # 2 minutes
+print(format_duration(3600)) # 1 hour
+print(format_duration(3662)) # 1 hour, 1 minute and 2 seconds
