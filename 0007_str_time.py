@@ -1,4 +1,6 @@
+# incomplete
 import numpy as np
+
 def stat(strg):
     
     def str_to_time(strg):
