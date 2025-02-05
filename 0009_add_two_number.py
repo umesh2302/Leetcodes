@@ -17,14 +17,13 @@ class Solution:
         reversed_total = self.reverse_number_list(total)
         return self.create_linked_list(reversed_total)
 
-        return number
     def extract_number(self, l: Optional[ListNode], number: list) -> list:
         while l is not None:
             number.append(l.val)
             l = l.next
         return l, number
     
-    def add_number(self, number: list) -> int:
+    def add_number(self, number: list) -> int
         return int(''.join(map(str, number)))
     def reverse_number_list(self, number: int) -> int:
         return [int(x) for x in str(number)][::-1]
